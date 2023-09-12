@@ -4,6 +4,8 @@
     <title>Thymeleaf Test</title>
     <meta charset="UTF-8">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -39,11 +41,21 @@
         </tbody>
     </table>
 
+
+    <input id="comment" placeholder="댓글을 입력하세요">
+    <button onclick="addComment()">댓글달기</button>
+
+    <div id="commentContainer"></div>
 </body>
 </html>
 
 <script>
     function onClickRow(studentId) {
         location.href = "/student/" + studentId;
+    }
+
+    function addComment() {
+        var comment = $("#comment").val();
+        $("#commentContainer").append("<div>" + comment + "</div>");
     }
 </script>
