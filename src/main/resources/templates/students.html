@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Test</title>
+    <meta charset="UTF-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+    <h1>학생목록</h1>
+
+    <button onclick="location.href='/new-student'">학생등록</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>주소</th>
+                <th>입학일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}" th:onclick="onClickRow([[${student.studentId}]])" class="table-row">
+                <td th:text="${student.studentId}"></td>
+                <td th:text="${student.studentName}"></td>
+                <td th:text="${student.studentAddress}"></td>
+                <td th:text="${student.admissionDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- container는 가장 상위 요소 -->
+    <div class="container">
+        <!-- row는 간단하게 설명하자면 콘텐츠영역을 감싸는 상위요소입니다. -->
+        <div class="row"> <!-- 이 영역은 콘텐츠 3개를 포함합니다.-->
+            <!-- col-md-숫자는 콘텐츠영역입니다.  -->
+            <div class="col-md-4">
+                아이템
+            </div>
+            <div class="col-md-4">
+                아이템
+            </div>
+            <div class="col-md-4">
+                아이템
+            </div>
+        </div>
+
+        <div class="row"> <!-- 이 영역은 콘텐츠 4개를 포함합니다.-->
+            <!-- col-md-숫자는 콘텐츠영역입니다.  -->
+            <div class="col-md-3">
+                아이템
+            </div>
+            <div class="col-md-3">
+                아이템
+            </div>
+            <div class="col-md-3">
+                아이템
+            </div>
+            <div class="col-md-3">
+                아이템
+            </div>
+        </div>
+
+        <div class="row"> <!-- 이 영역은 콘텐츠 2개를 포함합니다.-->
+            <!-- col-md-숫자는 콘텐츠영역입니다.  -->
+            <div class="col-md-6">
+                아이템
+            </div>
+            <div class="col-md-6">
+                아이템
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    function onClickRow(studentId) {
+        location.href = "/student/" + studentId;
+    }
+</script>
