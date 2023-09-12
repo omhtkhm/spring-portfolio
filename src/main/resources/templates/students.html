@@ -45,7 +45,9 @@
     <input id="comment" placeholder="댓글을 입력하세요">
     <button onclick="addComment()">댓글달기</button>
 
-    <div id="commentContainer"></div>
+    <div id="commentContainer" th:each="comment : ${comments}" >
+        <div th:text="${comment.comment}"></div>
+    </div>
 </body>
 </html>
 
@@ -56,6 +58,32 @@
 
     function addComment() {
         var comment = $("#comment").val();
+
+        // 서버로 comment 전송 (ajax)
+        $.ajax({
+            url: "/api/add-comment" ,
+            type: 'post',
+            data: JSON.stringify({
+                comment: comment
+            }),
+            contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+            success: function(res) {
+                console.log(res);
+                if(res.success == false) {
+                    alert(res.msg);
+                    return;
+                } else {
+                    alert(res.msg);
+                }
+                $("#comment").val("");
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        })
+
+
+
         $("#commentContainer").append("<div>" + comment + "</div>");
     }
 </script>
