@@ -1,5 +1,6 @@
 package com.example.study04.controller.api;
 
+import com.example.study04.dto.CommonResponseDTO;
 import com.example.study04.dto.TeacherDTO;
 import com.example.study04.entity.Teacher;
 import com.example.study04.service.TeacherService;
@@ -34,16 +35,17 @@ public class TeacherApiController {
     }
 
     // 생성/수정: 화면에서 넘어온 dto -> entity 변환해서 저장
-    @PostMapping("/save-teacher")
-    public String saveTeacher(@ModelAttribute TeacherDTO teacherDTO) {
+    @PostMapping("/teachers")
+    public CommonResponseDTO saveTeacher(@RequestBody TeacherDTO teacherDTO) {
         teacherService.save(teacherDTO); // dto
-        return "redirect:teachers";
+        CommonResponseDTO responseDTO = new CommonResponseDTO(true, "성공", null);
+        return responseDTO;
     }
 
     // 삭제: 화면에서 넘어온 dto -> entity 변환해서 삭제
-    @PostMapping("/del-teacher")
-    public String delTeacher(@ModelAttribute TeacherDTO teacherDTO) {
-        teacherService.delete(teacherDTO); // dto
-        return "redirect:teachers";
+    @DeleteMapping("/teachers")
+    public CommonResponseDTO delTeacher(@RequestBody TeacherDTO teacherDTO) {
+        CommonResponseDTO responseDTO = new CommonResponseDTO(true, "성공", null);
+        return responseDTO;
     }
 }

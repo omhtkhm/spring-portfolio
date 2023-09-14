@@ -3,8 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
   Hello World!
+
+  <form action="/home/uploadfiles" method="post" enctype="multipart/form-data">
+      파일명 : <input type="file" name="myfile">
+      <button type="submit">제출하기</button>
+  </form>
+
+ <button type="button" onclick="getTeachers()">강사목록조회</button>
+ <button type="button" onclick="addTeacher()">강사추가</button>
 </body>
 </html>
+
+<script>
+    function getTeachers() {
+        $.ajax({
+            "url": "http://localhost:8080/api/teachers",
+            "method": "GET",
+        }).done(function (response) {
+            console.log(response);
+        });
+    }
+
+    function addTeacher() {
+        var settings = {
+            "url": "http://localhost:8080/api/teachers",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "name": "김말동",
+                "subject": "영어"
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+</script>
